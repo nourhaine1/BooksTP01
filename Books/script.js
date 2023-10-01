@@ -1,3 +1,5 @@
+
+var ListOfBooks = JSON.parse(localStorage.getItem('books'));
 function saveToLocalStorage() {
    console.log("test of function entry ");
 
@@ -25,7 +27,7 @@ var html='';
       html += "<td>" + element.name + "</td>"; html += "<td>" + element.auth + 
       "</td>"; html += "<td>" + element.cat + "</td>"; 
       html += "<td>" + element.price+ "</td>";
-      html += "<td>" + '<button class="btn btn-info" onclick="editBook()" > Edit</button>'+'<button class="btn btn-danger" onclick="deleteBook()"> Delete</button>'+ "</td>";
+      html += "<td>" + '<button class="btn btn-info" onclick="editBook()" > Edit</button>'+'<button class="btn btn-danger" onclick="deleteBook('+index +')"> Delete</button>'+ "</td>";
       html += "</tr>";
 
        });
@@ -37,3 +39,12 @@ var html='';
 window.onload = function() {
    getBooksFromLocalStorage();
 };
+
+function deleteBook(index){
+ 
+   ListOfBooks.splice(index, 1); // Remove the book at the given index
+  localStorage.setItem("books", JSON.stringify(ListOfBooks));
+  alert("Book deleted successfully.");
+   //getBooksFromLocalStorage();
+  }
+ 
